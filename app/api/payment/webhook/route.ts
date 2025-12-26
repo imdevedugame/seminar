@@ -1,3 +1,7 @@
+// Handler GET untuk test endpoint dari Midtrans
+export async function GET() {
+  return NextResponse.json({ message: "Webhook endpoint OK" }, { status: 200 })
+}
 import { NextResponse } from "next/server"
 import { getSupabaseServerClient } from "@/lib/supabase/server"
 import crypto from "crypto"
