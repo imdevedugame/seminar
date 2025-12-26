@@ -18,6 +18,11 @@ export async function POST(request: Request) {
   try {
     const notification = await request.json()
 
+    // Jika payload tidak lengkap (misal test dari Midtrans), balas 200 OK tanpa proses
+    if (!notification.order_id || !notification.status_code || !notification.gross_amount || !notification.signature_key) {
+      return NextResponse.json({ message: "Test notification or incomplete payload received. Webhook endpoint OK." }, { status: 200 })
+    }
+
     const orderId = notification.order_id
     const transactionStatus = notification.transaction_status
     const fraudStatus = notification.fraud_status
